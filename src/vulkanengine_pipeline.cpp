@@ -1,3 +1,4 @@
+#include <windows.h>
 #include "vulkanengine_pipeline.hpp"
 #include <fstream>
 #include <iostream>
@@ -5,6 +6,11 @@
 
 namespace vulkan_engine {
 VulkanEnginePipeline::VulkanEnginePipeline(const std::string &vertShaderPath, const std::string &fragShaderPath) {
+#ifdef _WIN32
+    char path[MAX_PATH];
+    GetModuleFileName(NULL, path, MAX_PATH);
+    std::cout << "current file is " << path << std::endl;
+#endif
     createGraphicsPipeline(vertShaderPath, fragShaderPath);
 }
 

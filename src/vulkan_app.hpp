@@ -13,7 +13,7 @@ public:
     void run();
 private:
     VulkanEngineWindow engineWindow {WIDTH, HEIGHT, "Hello Vulkan!"};
-    //VulkanEnginePipeline enginePipeline {"src/shaders/basic_first.vert.spv", "src/shaders/basic_first.frag.spv"};
+    VulkanEnginePipeline enginePipeline {"./shaders/basic_first.vert.spv", "src/shaders/basic_first.frag.spv"};
 };
 
 }

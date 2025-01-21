@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <cstdint>
 #include <string>
+#include <vulkan/vulkan.hpp>
 
 namespace vulkan_engine {
 class VulkanEngineWindow {
@@ -10,6 +11,7 @@ public:
     ~VulkanEngineWindow();
     VulkanEngineWindow(const VulkanEngineWindow &) = delete;
     VulkanEngineWindow &operator=(const VulkanEngineWindow &) = delete;
+    void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface_); 
 
     bool shouldClose() {return glfwWindowShouldClose(window);}
 private:

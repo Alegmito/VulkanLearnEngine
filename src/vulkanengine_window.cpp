@@ -1,8 +1,7 @@
 #include "vulkanengine_window.hpp"
 #include "GLFW/glfw3.h"
-#include <memory>
 
-namespace  vulkan_engine {
+using namespace vulkan_engine;
 VulkanEngineWindow::VulkanEngineWindow(uint32_t width, uint32_t height, std::string windowName)
     : width{width}, height{height}, windowName{windowName} {
     initWindow();
@@ -19,4 +18,6 @@ void VulkanEngineWindow::initWindow() {
 
     window = glfwCreateWindow(width, height, windowName.c_str(), nullptr, nullptr);
 }
+
+void VulkanEngineWindow::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface_) {
 }

@@ -1,7 +1,11 @@
+add_rules("mode.debug", "mode.release")
 add_requires("glm >= 1.0.1", "glfw >= 3.4", "vulkansdk")
 
 target("vulkanLearn")
     set_kind("binary")
     add_files("src/*.cpp")
-    -- add_files("src/*.hpp")
     add_packages("glm", "glfw", "vulkansdk")
+    before_build(function (target)
+        os.vcp("src/shaders/*.spv", target:targetdir() .. "/shaders/")
+        print("build dir %s", target:targetdir())
+    end)
