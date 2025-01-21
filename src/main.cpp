@@ -13,9 +13,8 @@
 
 using namespace vulkan_engine;
 int main() {
-    VulkanApp app{};
-
     try {
+        VulkanApp app{};
         app.run();
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;

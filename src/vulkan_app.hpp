@@ -1,5 +1,6 @@
 #pragma once
 
+#include "vulkanengine_pipeline.hpp"
 #include "vulkanengine_window.hpp"
 
 namespace vulkan_engine {
@@ -12,6 +13,7 @@ public:
     void run();
 private:
     VulkanEngineWindow engineWindow {WIDTH, HEIGHT, "Hello Vulkan!"};
+    //VulkanEnginePipeline enginePipeline {"src/shaders/basic_first.vert.spv", "src/shaders/basic_first.frag.spv"};
 };
 
 }
