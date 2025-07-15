@@ -1,5 +1,6 @@
 #pragma once
 
+#include "vulkanengine_device.hpp"
 #include "vulkanengine_pipeline.hpp"
 #include "vulkanengine_window.hpp"
 
@@ -12,8 +13,13 @@ public:
 
     void run();
 private:
-    VulkanEngineWindow engineWindow {WIDTH, HEIGHT, "Hello Vulkan!"};
-    VulkanEnginePipeline enginePipeline {"./shaders/basic_first.vert.spv", "src/shaders/basic_first.frag.spv"};
+    VulkanEngineWindow engineWindow_ {WIDTH, HEIGHT, "Hello Vulkan!"};
+    VulkanEngineDevice device_ {engineWindow_};
+    VulkanEnginePipeline enginePipeline_ {
+        device_ , 
+        "./shaders/basic_first.vert.spv", 
+        "src/shaders/basic_first.frag.spv", 
+        VulkanEnginePipeline::makePipelineConfInfo(WIDTH, HEIGHT)
+    };
 };
-
 }

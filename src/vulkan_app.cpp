@@ -4,7 +4,7 @@
 namespace vulkan_engine {
 
 void VulkanApp::run() {
-    while (!engineWindow.shouldClose()) {
+    while (!engineWindow_.shouldClose()) {
         glfwPollEvents();
     }
 }

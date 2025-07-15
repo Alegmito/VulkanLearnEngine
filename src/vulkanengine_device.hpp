@@ -2,8 +2,6 @@
 
 #include "vulkanengine_window.hpp"
 #include <vulkan/vulkan.hpp>
-
-// std lib headers
 #include <string>
 #include <vector>
 
