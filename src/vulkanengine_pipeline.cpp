@@ -76,13 +76,20 @@ void VulkanEnginePipeline::createGraphicsPipeline(
     vertexInputInfo.pVertexAttributeDescriptions = nullptr;
     vertexInputInfo.pVertexAttributeDescriptions = nullptr;
 
+    VkPipelineViewportStateCreateInfo viewportInfo {};
+    viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+    viewportInfo.viewportCount = 1;
+    viewportInfo.pViewports = &info.viewport;
+    viewportInfo.scissorCount = 1;
+    viewportInfo.pScissors = &info.scissor;
+
     VkGraphicsPipelineCreateInfo pipelineInfo {};
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
     pipelineInfo.stageCount = 2;
     pipelineInfo.pStages = shaderStages;
     pipelineInfo.pVertexInputState = &vertexInputInfo;
     pipelineInfo.pInputAssemblyState = &info.inputAssemblyInfo;
-    pipelineInfo.pViewportState = &info.viewportInfo;
+    pipelineInfo.pViewportState = &viewportInfo;
     pipelineInfo.pRasterizationState = &info.rasterizationInfo;
     pipelineInfo.pMultisampleState = &info.multisampleInfo;
     pipelineInfo.pColorBlendState = &info.colorBlendInfo;
@@ -127,12 +134,6 @@ PipelineConfigInfo VulkanEnginePipeline::makePipelineConfInfo(uint32_t width, ui
 
     info.scissor.offset = {0, 0};
     info.scissor.extent = {width, height};
-
-    info.viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-    info.viewportInfo.viewportCount = 1;
-    info.viewportInfo.pViewports = &info.viewport;
-    info.viewportInfo.scissorCount = 1;
-    info.viewportInfo.pScissors = &info.scissor;
 
     info.rasterizationInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
     info.rasterizationInfo.depthClampEnable = VK_FALSE;

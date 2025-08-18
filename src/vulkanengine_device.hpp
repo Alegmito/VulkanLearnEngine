@@ -2,7 +2,6 @@
 
 #include "vulkanengine_window.hpp"
 #include <vulkan/vulkan.hpp>
-#include <string>
 #include <vector>
 
 namespace vulkan_engine {

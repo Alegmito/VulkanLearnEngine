@@ -15,6 +15,7 @@ public:
     void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface_); 
 
     bool shouldClose() {return glfwWindowShouldClose(window);}
+    VkExtent2D getExtent() {return VkExtent2D{width, height};}
 private:
     void initWindow();
 
