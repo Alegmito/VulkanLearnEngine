@@ -65,7 +65,7 @@ class VulkanEngineSwapChain {
   std::vector<VkImage> swapChainImages;
   std::vector<VkImageView> swapChainImageViews;
 
-  VulkanEngineDevice &device;
+  VulkanEngineDevice &device_;
   VkExtent2D windowExtent;
 
   VkSwapchainKHR swapChain;

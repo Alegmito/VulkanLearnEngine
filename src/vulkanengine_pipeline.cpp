@@ -19,9 +19,9 @@ VulkanEnginePipeline::VulkanEnginePipeline(
 }
 
 VulkanEnginePipeline::~VulkanEnginePipeline() {
-    vkDestroyShaderModule(vkDevice_.device(), vertShaderModule_, nullptr);
-    vkDestroyShaderModule(vkDevice_.device(), fragShaderModule_, nullptr);
-    vkDestroyPipeline(vkDevice_.device(), graphicsPipeline_, nullptr);
+    vkDestroyShaderModule(vkDevice_.getDevice(), vertShaderModule_, nullptr);
+    vkDestroyShaderModule(vkDevice_.getDevice(), fragShaderModule_, nullptr);
+    vkDestroyPipeline(vkDevice_.getDevice(), graphicsPipeline_, nullptr);
 }
 
 std::vector<char> VulkanEnginePipeline::readFile(const std::string path) {
@@ -44,6 +44,14 @@ std::vector<char> VulkanEnginePipeline::readFile(const std::string path) {
 void VulkanEnginePipeline::createGraphicsPipeline(
     const std::string &vertShaderPath, const std::string &fragShaderPath, const PipelineConfigInfo& info
 ) {
+    assert(
+        info.pipelineLayout != VK_NULL_HANDLE &&
+        "Cannot create graphics pipeline: no pipelineLayout provided in configInfo"
+    );
+    assert(
+        info.renderPass != VK_NULL_HANDLE &&
+        "Cannot create graphics pipeline: no renderPass provided in configInfo"
+    );
     auto vertShaderCode = readFile(vertShaderPath);
     auto fragShaderCode = readFile(fragShaderPath);
 
@@ -102,7 +110,7 @@ void VulkanEnginePipeline::createGraphicsPipeline(
 
     pipelineInfo.basePipelineIndex = -1;
     pipelineInfo.basePipelineHandle = VK_NULL_HANDLE;
-    if (vkCreateGraphicsPipelines(vkDevice_.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline_) != VK_SUCCESS) {
+    if (vkCreateGraphicsPipelines(vkDevice_.getDevice(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline_) != VK_SUCCESS) {
         throw std::runtime_error("failed to create graphics pipeline successfully");
     }
 
@@ -114,7 +122,7 @@ void VulkanEnginePipeline::createShaderModule(const std::vector<char>& code, VkS
     createInfo.codeSize = code.size();
     createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
 
-    if (vkCreateShaderModule(vkDevice_.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
+    if (vkCreateShaderModule(vkDevice_.getDevice(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
         throw s::runtime_error("failed to create shader module");
     }
 }
